@@ -1,10 +1,12 @@
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom'
 import { PagePlaceholder } from './components/PagePlaceholder'
 import { GrammarLabPage } from './pages/GrammarLabPage'
+import { ReferencesPage } from './pages/ReferencesPage'
 
 const navigation = [
   { label: 'Home', path: '/' },
   { label: 'Grammar', path: '/grammar' },
+  { label: 'References', path: '/references' },
   { label: 'Deconstruct', path: '/deconstruct' },
   { label: 'Generator', path: '/generator' },
   { label: 'Pose Mirror', path: '/pose' },
@@ -65,6 +67,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/grammar" element={<GrammarLabPage />} />
+            <Route path="/references" element={<ReferencesPage />} />
             <Route path="/deconstruct" element={<PagePlaceholder title="Deconstruct" />} />
             <Route path="/generator" element={<PagePlaceholder title="Generator" />} />
             <Route path="/pose" element={<PagePlaceholder title="Pose Mirror" />} />

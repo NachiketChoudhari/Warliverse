@@ -44,6 +44,7 @@ export interface GrammarRule {
   description: string
   source: 'project-configuration'
   check: 'allowed-motif' | 'required-human-parts' | 'human-part-primitive'
+  sourceReferenceIds?: readonly string[]
 }
 
 export interface GrammarViolation {

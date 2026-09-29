@@ -50,6 +50,7 @@ The application keeps reference-derived information, software configuration, and
 
 - `/` — project landing page
 - `/grammar` — Grammar Lab for configured primitives, motif sketches, structure, and rules
+- `/references` — source and documentation structure; currently empty
 - `/deconstruct` — placeholder
 - `/generator` — placeholder
 - `/pose` — placeholder
@@ -59,6 +60,24 @@ The application keeps reference-derived information, software configuration, and
 ## Stack
 
 React, TypeScript, Vite, React Router, Tailwind CSS, SVG, and Vitest. The app is client-side and requires no database or paid API.
+
+## Reference Data Pipeline
+
+```text
+Reference Artwork
+        ↓
+Source Metadata
+        ↓
+Motif Observation
+        ↓
+Grammar Observation
+        ↓
+Structured Rule
+        ↓
+Procedural System
+```
+
+The reference collection currently contains no records. Source-backed rules will be introduced only after reference material has been recorded and reviewed. Numerical observations must link to supporting source material.
 
 ## Checks
 
