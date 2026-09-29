@@ -2,6 +2,8 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom'
 import { PagePlaceholder } from './components/PagePlaceholder'
 import { GrammarLabPage } from './pages/GrammarLabPage'
 import { ReferencesPage } from './pages/ReferencesPage'
+import { GeneratorPage } from './pages/GeneratorPage'
+import { DeconstructPage } from './pages/DeconstructPage'
 
 const navigation = [
   { label: 'Home', path: '/' },
@@ -28,7 +30,7 @@ function HomePage() {
         A workspace for exploring documented visual grammar, artwork structures, and digital preservation.
       </p>
       <div className="mt-10 border-l-2 border-terracotta/50 pl-5 text-sm leading-6 text-muted">
-        Phase 1 establishes a structured software representation. Reference material will be added as it is documented.
+        The grammar and documentation structures are in place. Procedural scenes use explicit demo configurations until source-backed rules are reviewed.
       </div>
     </section>
   )
@@ -68,8 +70,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/grammar" element={<GrammarLabPage />} />
             <Route path="/references" element={<ReferencesPage />} />
-            <Route path="/deconstruct" element={<PagePlaceholder title="Deconstruct" />} />
-            <Route path="/generator" element={<PagePlaceholder title="Generator" />} />
+            <Route path="/deconstruct" element={<DeconstructPage />} />
+            <Route path="/generator" element={<GeneratorPage />} />
             <Route path="/pose" element={<PagePlaceholder title="Pose Mirror" />} />
             <Route path="/personalize" element={<PagePlaceholder title="Personalize" />} />
             <Route path="/archive" element={<PagePlaceholder title="Archive" />} />

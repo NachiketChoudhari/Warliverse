@@ -46,13 +46,15 @@ The current grammar engine is a rule-based software representation. It is not a 
 
 The application keeps reference-derived information, software configuration, and generated artwork as distinct concepts. No reference dataset is included yet. Numerical constraints will only be added after they are supported by the project's reference dataset; unsupported measurements report a `not-configured` state.
 
+The `/generator` page currently uses seeded procedural composition and clearly labeled prototype/demo layouts. `/deconstruct` demonstrates the structured composition → motif/primitive representation → procedural reconstruction flow using that generator output. Neither feature analyzes source artwork or uses source-backed cultural themes. They are rule-based software features, not trained machine-learning models.
+
 ## Current routes
 
 - `/` — project landing page
 - `/grammar` — Grammar Lab for configured primitives, motif sketches, structure, and rules
 - `/references` — source and documentation structure; currently empty
-- `/deconstruct` — placeholder
-- `/generator` — placeholder
+- `/deconstruct` — inspect and reconstruct a labeled procedural demonstration
+- `/generator` — seeded procedural compositions from explicit prototype/demo layouts
 - `/pose` — placeholder
 - `/personalize` — placeholder
 - `/archive` — placeholder

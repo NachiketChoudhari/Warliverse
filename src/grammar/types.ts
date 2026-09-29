@@ -43,7 +43,7 @@ export interface GrammarRule {
   id: string
   description: string
   source: 'project-configuration'
-  check: 'allowed-motif' | 'required-human-parts' | 'human-part-primitive'
+  check: 'allowed-motif' | 'required-human-parts' | 'human-part-primitive' | 'theme-allowed-motifs'
   sourceReferenceIds?: readonly string[]
 }
 
