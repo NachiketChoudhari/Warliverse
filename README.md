@@ -102,6 +102,16 @@ Open `/competition` for a guided 3–5 minute workflow: understand the configure
 
 Pose Mirror provides a deterministic Demo Mode when camera access is unavailable. Camera processing stays in the browser; frames are not uploaded or saved by this application. Fullscreen presentation mode is optional and falls back gracefully when the browser does not support or grant fullscreen access. The archive currently has no reference records and no source-backed grammar rules; the configured rules remain pending documentation. Cultural validation is not complete. Core grammar, generation, deconstruction, and export features run locally without a database or paid API; live pose estimation uses the locally included detector assets.
 
+## Research Workflow
+
+The current archive is intentionally empty. Future research material must follow:
+
+```text
+Source → Reference → Observation → Evidence → Review → Configured Rule
+```
+
+An observation does not automatically become a software rule. See `docs/research-readiness.md`, `docs/source-review-checklist.md`, and `docs/research-entry-template.md` for the current audit, source review checklist, and blank entry template. The application does not currently contain a verified cultural dataset.
+
 ## Checks
 
 ```sh
