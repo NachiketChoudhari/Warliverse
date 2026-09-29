@@ -13,6 +13,7 @@ export interface WarliCanvasProps {
   className?: string
   style?: CSSProperties
   label?: string
+  clipPath?: string
 }
 
 const renderers = {
@@ -24,8 +25,8 @@ const renderers = {
 }
 
 /** Shared SVG viewport. Coordinates and motif geometry are presentation units configured by this prototype. */
-export function WarliCanvas({ elements, width = 800, height = 420, className, style, label = 'Warli visual grammar canvas' }: WarliCanvasProps) {
-  return <svg className={className} style={style} viewBox={`0 0 ${width} ${height}`} role="img" aria-label={label}>
+export function WarliCanvas({ elements, width = 800, height = 420, className, style, label = 'Warli visual grammar canvas', clipPath }: WarliCanvasProps) {
+  return <svg className={className} style={style} width={width} height={height} viewBox={`0 0 ${width} ${height}`} clipPath={clipPath} role="img" aria-label={label}>
     <rect width={width} height={height} fill="#f7f3e9" />
     {elements.map((element) => {
       const Renderer = renderers[element.kind]

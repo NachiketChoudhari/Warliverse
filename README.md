@@ -1,6 +1,6 @@
 # WARLI — Visual Grammar & Digital Preservation Studio
 
-An Aavishkar competition project for representing documented Warli visual grammar and supporting digital preservation. The application includes a structured, rule-based grammar model, source-aware reference architecture, procedural SVG composition, deconstruction/reconstruction, and a browser-local Pose Mirror.
+An Aavishkar competition project for representing documented Warli visual grammar and supporting digital preservation. The application includes a structured, rule-based grammar model, source-aware reference architecture, procedural SVG composition, deconstruction/reconstruction, a browser-local Pose Mirror, and product-format personalization.
 
 ## Requirements
 
@@ -39,7 +39,9 @@ SVG primitives
       ↓
 Motifs
       ↓
-Future procedural generation
+Procedural compositions
+      ↓
+Deconstruction and product-format personalization
 ```
 
 The current grammar engine is a rule-based software representation. It is not a trained machine-learning model.
@@ -56,7 +58,7 @@ The `/generator` page currently uses seeded procedural composition and clearly l
 - `/deconstruct` — inspect and reconstruct a labeled procedural demonstration
 - `/generator` — seeded procedural compositions from explicit prototype/demo layouts
 - `/pose` — browser-local pose landmarks mapped into the configured SVG human figure, with deterministic Demo Mode
-- `/personalize` — placeholder
+- `/personalize` — deterministic product previews and exports using existing procedural demo layouts
 - `/archive` — placeholder
 
 ## Stack
@@ -88,6 +90,10 @@ Procedural System
 ```
 
 The reference collection currently contains no records. Source-backed rules will be introduced only after reference material has been recorded and reviewed. Numerical observations must link to supporting source material.
+
+## Personalization Studio
+
+The Personalization Studio maps four seeded compositions from the existing generator into configured product preview areas. Layouts are procedural demonstrations, not source-backed cultural themes. Product canvas sizes and safe areas are renderer settings, not physical or cultural measurements. The studio validates compositions with the existing grammar validator and exports the selected vector preview and a deterministic, versioned JSON record without timestamps or user/session data.
 
 ## Checks
 
