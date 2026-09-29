@@ -1,6 +1,9 @@
+import { getDocumentationStatus } from './documentationCounts'
+
 const pipeline = ['Source', 'Observation', 'Grammar', 'Digital representation', 'Generation', 'Interaction', 'Application', 'Documentation'];
 
 export function PreservationSummary() {
+  const status = getDocumentationStatus()
   return (
     <section aria-labelledby="preservation-summary-title" className="space-y-8">
       <div>
@@ -16,10 +19,10 @@ export function PreservationSummary() {
         <div><h3 className="font-serif text-xl">Artist and community supportive</h3><p className="mt-2 text-stone-700">The project is intended to support documentation and experimentation with appropriate attribution.</p></div>
       </div>
       <div className="border-l-2 border-stone-700 pl-4 text-stone-700">
-        <p>The current archive contains no source records yet.</p>
+        <p>The current archive contains {status.referenceRecords} catalogue/artwork references and has {status.sourceBackedRules} source-backed rules.</p>
+        <p className="mt-2">No motif observations, grammar observations, or measurements are currently recorded.</p>
         <p className="mt-2">Cultural validation is not complete. Source-backed interpretation depends on reviewed and attributed material.</p>
       </div>
     </section>
   );
 }
-

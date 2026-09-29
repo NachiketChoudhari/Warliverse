@@ -54,7 +54,7 @@ The `/generator` page currently uses seeded procedural composition and clearly l
 
 - `/` — project landing page
 - `/grammar` — Grammar Lab for configured primitives, motif sketches, structure, and rules
-- `/references` — source and documentation structure; currently empty
+- `/references` — source and artwork catalogue metadata, observations, and evidence status
 - `/deconstruct` — inspect and reconstruct a labeled procedural demonstration
 - `/generator` — seeded procedural compositions from explicit prototype/demo layouts
 - `/pose` — browser-local pose landmarks mapped into the configured SVG human figure, with deterministic Demo Mode
@@ -90,7 +90,7 @@ Structured Rule
 Procedural System
 ```
 
-The reference collection currently contains no records. Source-backed rules will be introduced only after reference material has been recorded and reviewed. Numerical observations must link to supporting source material.
+The initial research corpus contains six source records (including two candidate institutional documents pending review) and seven artwork/catalogue references. It contains no motif or grammar observations, measurements, or grammar evidence records. Source-backed rules remain at zero. Numerical observations must link to supporting source material.
 
 ## Personalization Studio
 
@@ -98,19 +98,23 @@ The Personalization Studio maps four seeded compositions from the existing gener
 
 ## Competition Mode
 
-Open `/competition` for a guided 3–5 minute workflow: understand the configured grammar, inspect the empty reference archive, create a procedural composition, deconstruct and reconstruct it, try Pose Mirror, review product personalization, and close with the preservation summary. The existing Generator, Deconstruct, Pose Mirror, and Personalization implementations are reused.
+Open `/competition` for a guided 3–5 minute workflow: understand the configured grammar, inspect the source-aware reference archive, create a procedural composition, deconstruct and reconstruct it, try Pose Mirror, review product personalization, and close with the preservation summary. The existing Generator, Deconstruct, Pose Mirror, and Personalization implementations are reused.
 
-Pose Mirror provides a deterministic Demo Mode when camera access is unavailable. Camera processing stays in the browser; frames are not uploaded or saved by this application. Fullscreen presentation mode is optional and falls back gracefully when the browser does not support or grant fullscreen access. The archive currently has no reference records and no source-backed grammar rules; the configured rules remain pending documentation. Cultural validation is not complete. Core grammar, generation, deconstruction, and export features run locally without a database or paid API; live pose estimation uses the locally included detector assets.
+Pose Mirror provides a deterministic Demo Mode when camera access is unavailable. Camera processing stays in the browser; frames are not uploaded or saved by this application. Fullscreen presentation mode is optional and falls back gracefully when the browser does not support or grant fullscreen access. The archive contains catalogue metadata but no source-backed grammar rules; the configured rules remain pending documentation. Cultural validation is not complete. Core grammar, generation, deconstruction, and export features run locally without a database or paid API; live pose estimation uses the locally included detector assets.
 
 ## Research Workflow
 
-The current archive is intentionally empty. Future research material must follow:
+The initial archive contains a small metadata-only corpus. New research material must follow:
 
 ```text
 Source → Reference → Observation → Evidence → Review → Configured Rule
 ```
 
-An observation does not automatically become a software rule. See `docs/research-readiness.md`, `docs/source-review-checklist.md`, and `docs/research-entry-template.md` for the current audit, source review checklist, and blank entry template. The application does not currently contain a verified cultural dataset.
+An observation does not automatically become a software rule. The Phase 10 import validator is used before the corpus is applied; it validates provenance and does not promote grammar rules. See `docs/research-corpus-v1.md` and `docs/rule-promotion-review.md` for corpus scope and the four rule decisions, along with `docs/research-readiness.md`, `docs/source-review-checklist.md`, and `docs/research-entry-template.md` for the schema and review workflow. The current corpus is not a comprehensive or culturally validated dataset.
+
+## Research Corpus
+
+The v1 corpus prioritizes museum and government catalogues, with one clearly labelled secondary academic source. It is limited to seven catalogue/artwork references rather than expanded to meet a target count. Two institutional PDFs remain candidate sources because their contents could not be reviewed reliably. Every artwork record links to a source; no source images are copied into the repository. Rights are recorded only when the source states them. The archive currently contains no motif observations, grammar observations, or measurements, and no configured rule has been promoted. New interpretations require source-linked observations, cross-source comparison where appropriate, and explicit review; this corpus does not represent all Warli art.
 
 ## Checks
 

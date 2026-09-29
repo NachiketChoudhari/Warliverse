@@ -45,13 +45,13 @@ describe('competition mode', () => {
   });
 
   it('calculates the current documentation status', () => {
-    expect(getDocumentationStatus()).toEqual({ referenceRecords: 0, sourceBackedRules: 0, rulesPendingDocumentation: 4 });
+    expect(getDocumentationStatus()).toEqual({ referenceRecords: 7, sourceBackedRules: 0, rulesPendingDocumentation: 4 });
     expect(renderToStaticMarkup(createElement(DocumentationStatus))).toContain('Rules pending documentation');
   });
 
-  it('reports the intentional zero-reference archive state', () => {
-    expect(getDocumentationStatus().referenceRecords).toBe(0);
-    expect(renderToStaticMarkup(createElement(DocumentationStatus))).toContain('>0</dd>');
+  it('reports the current catalogue and pending-rule counts', () => {
+    expect(getDocumentationStatus().referenceRecords).toBe(7);
+    expect(renderToStaticMarkup(createElement(DocumentationStatus))).toContain('>7</dd>');
   });
 
   it('reports zero source-backed rules without adding evidence', () => {
@@ -69,7 +69,7 @@ describe('competition mode', () => {
     const html = renderToStaticMarkup(createElement(PreservationSummary));
     expect(html).toContain('Source-aware');
     expect(html).toContain('Rule-based');
-    expect(html).toContain('The current archive contains no source records yet.');
+    expect(html).toContain('The current archive contains 7 catalogue/artwork references and has 0 source-backed rules.');
     expect(html).toContain('Cultural validation is not complete.');
   });
 

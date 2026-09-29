@@ -5,10 +5,11 @@ import { getGrammarEvidenceCounts } from './grammarEvidence';
 import type { GrammarRule } from '../grammar/types';
 
 describe('current grammar evidence state', () => {
-  it('keeps all configured rules pending while the research collection is empty', () => {
+  it('keeps all configured rules pending despite imported reference metadata', () => {
     const evidence = getGrammarEvidenceCounts(grammarRules, referenceCollection.sources);
     const rules: readonly GrammarRule[] = grammarRules;
-    expect(referenceCollection).toEqual({ sources: [], artworks: [] });
+    expect(referenceCollection.sources.length).toBeGreaterThan(0);
+    expect(referenceCollection.artworks.length).toBeGreaterThan(0);
     expect(grammarRules.map(({ id }) => id)).toEqual([
       'motif.allowed',
       'human.parts.required',
