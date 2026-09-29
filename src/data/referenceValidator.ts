@@ -1,9 +1,18 @@
 import type { GrammarRule } from '../grammar/types'
+import { motifs } from './motifs'
+import { primitives } from './primitives'
 import type {
   ReferenceCollection,
   ReferenceValidationIssue,
   ReferenceValidationResult,
 } from './references'
+
+const knownMotifIds = new Set<string>(motifs.map(({ id }) => id))
+const knownPrimitiveIds = new Set<string>(primitives.map(({ id }) => id))
+const observationKinds = new Set([
+  'primitive-usage', 'figure-structure', 'composition', 'relative-positioning',
+  'repetition', 'angles', 'proportions', 'motif-relationships',
+])
 
 /** Checks data integrity and provenance links; it makes no authenticity judgments. */
 export function validateReferenceCollection(
@@ -65,10 +74,22 @@ export function validateReferenceCollection(
     artwork.motifs?.forEach((observation) => {
       registerId(observation.id, 'motif-observation')
       checkSourceReference(observation.sourceReferenceId, 'motif-observation', observation.id, 'sourceReferenceId')
+      if (observation.motifId && !knownMotifIds.has(observation.motifId)) {
+        issues.push({ code: 'invalid-motif', recordType: 'motif-observation', recordId: observation.id, field: 'motifId', message: `Motif “${observation.motifId}” is not in the configured vocabulary.` })
+      }
+      if (observation.primitiveId && !knownPrimitiveIds.has(observation.primitiveId)) {
+        issues.push({ code: 'invalid-primitive', recordType: 'motif-observation', recordId: observation.id, field: 'primitiveId', message: `Primitive “${observation.primitiveId}” is not in the configured vocabulary.` })
+      }
+      if (!observationKinds.has(observation.kind)) {
+        issues.push({ code: 'invalid-observation-kind', recordType: 'motif-observation', recordId: observation.id, field: 'kind', message: `Observation kind “${observation.kind}” is not configured.` })
+      }
     })
     artwork.observations?.forEach((observation) => {
       registerId(observation.id, 'grammar-observation')
       checkSourceReference(observation.sourceReferenceId, 'grammar-observation', observation.id, 'sourceReferenceId')
+      if (!observationKinds.has(observation.kind)) {
+        issues.push({ code: 'invalid-observation-kind', recordType: 'grammar-observation', recordId: observation.id, field: 'kind', message: `Observation kind “${observation.kind}” is not configured.` })
+      }
     })
     artwork.measurements?.forEach((measurement) => {
       registerId(measurement.id, 'measurement')

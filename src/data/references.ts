@@ -101,12 +101,30 @@ export interface ReferenceCollection {
   artworks: ReferenceArtwork[]
 }
 
+/** Portable research record bundle. Version 1 is prepared for future safe imports. */
+export interface ReferenceResearchExport {
+  schemaVersion: 1
+  sources: ReferenceSource[]
+  artworks: ReferenceArtwork[]
+  grammarEvidence: GrammarEvidenceRecord[]
+}
+
+export interface GrammarEvidenceRecord {
+  ruleId: string
+  description: string
+  sourceReferenceIds: string[]
+  observationIds: string[]
+}
+
 export interface ReferenceValidationIssue {
   code:
     | 'missing-required-field'
     | 'duplicate-id'
     | 'broken-source-reference'
     | 'measurement-without-source'
+    | 'invalid-motif'
+    | 'invalid-primitive'
+    | 'invalid-observation-kind'
   recordType: 'source' | 'artwork' | 'motif-observation' | 'grammar-observation' | 'grammar-rule' | 'measurement'
   recordId?: string
   field: string

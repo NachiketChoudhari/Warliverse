@@ -78,4 +78,43 @@ describe('reference collection validation', () => {
 
     expect(result).toEqual({ valid: true, issues: [] })
   })
+
+  it('validates motif observations against the configured motif and primitive vocabulary', () => {
+    const valid = validateReferenceCollection({
+      sources: [],
+      artworks: [{ id: 'art-test', title: 'Test fixture', documentationStatus: 'pending-review', motifs: [{ id: 'motif-test', kind: 'primitive-usage', motifId: 'human', primitiveId: 'circle' }] }],
+    })
+    expect(valid).toEqual({ valid: true, issues: [] })
+
+    const invalid = validateReferenceCollection({
+      sources: [],
+      artworks: [{ id: 'art-test', title: 'Test fixture', documentationStatus: 'pending-review', motifs: [{ id: 'motif-test', kind: 'primitive-usage', motifId: 'dragon', primitiveId: 'square' }] }],
+    })
+    expect(invalid.issues).toEqual(expect.arrayContaining([
+      expect.objectContaining({ code: 'invalid-motif', recordType: 'motif-observation' }),
+      expect.objectContaining({ code: 'invalid-primitive', recordType: 'motif-observation' }),
+    ]))
+  })
+
+  it('validates grammar observation kinds and keeps observation separate from a software rule', () => {
+    const valid = validateReferenceCollection({
+      sources: [],
+      artworks: [{ id: 'art-test', title: 'Test fixture', documentationStatus: 'pending-review', observations: [{ id: 'obs-test', kind: 'composition', description: 'Test-only observation.' }] }],
+    })
+    expect(valid).toEqual({ valid: true, issues: [] })
+
+    const invalid = validateReferenceCollection({
+      sources: [],
+      artworks: [{ id: 'art-test', title: 'Test fixture', documentationStatus: 'pending-review', observations: [{ id: 'obs-test', kind: 'invented-kind' as 'composition' }] }],
+    })
+    expect(invalid.issues).toContainEqual(expect.objectContaining({ code: 'invalid-observation-kind', recordType: 'grammar-observation' }))
+  })
+
+  it('accepts a grammar rule linked to a source record', () => {
+    const result = validateReferenceCollection({
+      sources: [{ id: 'source-test', title: 'Test fixture source', sourceType: 'academic', documentationStatus: 'pending-review' }],
+      artworks: [],
+    }, [{ id: 'rule-test', description: 'Test rule', source: 'project-configuration', check: 'allowed-motif', sourceReferenceIds: ['source-test'] }])
+    expect(result).toEqual({ valid: true, issues: [] })
+  })
 })

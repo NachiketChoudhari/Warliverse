@@ -41,6 +41,9 @@ function GrammarTrace({ composition }: { composition: GeneratedComposition }) {
     ...composition.sourceReferenceIds,
     ...usedRules.flatMap(({ sourceReferenceIds }) => sourceReferenceIds ?? []),
   ])
+  const sourceBackedRuleCount = usedRules.filter(({ sourceReferenceIds }) =>
+    sourceReferenceIds?.some((id) => referenceCollection.sources.some((source) => source.id === id)),
+  ).length
 
   return <section className="border border-line bg-white/25 p-5 sm:p-6" aria-labelledby="trace-heading">
     <p className="text-xs uppercase tracking-[0.18em] text-muted">Traceability</p>
@@ -66,10 +69,11 @@ function GrammarTrace({ composition }: { composition: GeneratedComposition }) {
       </div>
       <div>
         <h3 className="text-sm font-semibold">Source references</h3>
+        <p className="mt-1 text-sm text-muted">Source-backed rules: {sourceBackedRuleCount}</p>
         <p className="mt-1 text-sm text-muted">
           {linkedSources.size > 0
             ? [...linkedSources].map((id) => referenceCollection.sources.find((source) => source.id === id)?.title ?? id).join(', ')
-            : 'No source-backed rules are attached to this composition yet.'}
+            : 'No source-backed grammar rules are currently configured.'}
         </p>
       </div>
     </div>
@@ -89,6 +93,10 @@ export function GeneratorPage() {
 
   const selectedTheme = demoThemes.find(({ id }) => id === themeId)
   const validation = composition ? validateGrammar(compositionToGrammarSubject(composition)) : null
+  const sourceBackedRuleCount = composition
+    ? grammarRules.filter((rule: GrammarRule) => composition.grammarRulesUsed.includes(rule.id)
+      && rule.sourceReferenceIds?.some((id) => referenceCollection.sources.some((source) => source.id === id))).length
+    : 0
 
   function generateAt(seed: number, selectedThemeId = themeId) {
     const result = generateComposition(seed, selectedThemeId)
@@ -248,7 +256,7 @@ export function GeneratorPage() {
           <div className="mt-5 border border-line p-4 text-sm">
             <h3 className="font-medium">Documentation Status</h3>
             <p className="mt-2 text-muted">Configured visual grammar: active</p>
-            <p className="mt-1 text-muted">Source-backed rules: {composition.sourceReferenceIds.length > 0 ? composition.sourceReferenceIds.length : 'none'}</p>
+            <p className="mt-1 text-muted">Source-backed rules: {sourceBackedRuleCount}</p>
             <p className="mt-1 text-muted">Reference collection: {referenceCollection.sources.length === 0 ? 'pending documentation' : 'contains source records'}</p>
           </div>
         </div>
