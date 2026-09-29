@@ -59,6 +59,7 @@ The `/generator` page currently uses seeded procedural composition and clearly l
 - `/generator` — seeded procedural compositions from explicit prototype/demo layouts
 - `/pose` — browser-local pose landmarks mapped into the configured SVG human figure, with deterministic Demo Mode
 - `/personalize` — deterministic product previews and exports using existing procedural demo layouts
+- `/competition` — seven-stage, 3–5 minute judge-facing presentation with optional fullscreen
 - `/archive` — placeholder
 
 ## Stack
@@ -94,6 +95,12 @@ The reference collection currently contains no records. Source-backed rules will
 ## Personalization Studio
 
 The Personalization Studio maps four seeded compositions from the existing generator into configured product preview areas. Layouts are procedural demonstrations, not source-backed cultural themes. Product canvas sizes and safe areas are renderer settings, not physical or cultural measurements. The studio validates compositions with the existing grammar validator and exports the selected vector preview and a deterministic, versioned JSON record without timestamps or user/session data.
+
+## Competition Mode
+
+Open `/competition` for a guided 3–5 minute workflow: understand the configured grammar, inspect the empty reference archive, create a procedural composition, deconstruct and reconstruct it, try Pose Mirror, review product personalization, and close with the preservation summary. The existing Generator, Deconstruct, Pose Mirror, and Personalization implementations are reused.
+
+Pose Mirror provides a deterministic Demo Mode when camera access is unavailable. Camera processing stays in the browser; frames are not uploaded or saved by this application. Fullscreen presentation mode is optional and falls back gracefully when the browser does not support or grant fullscreen access. The archive currently has no reference records and no source-backed grammar rules; the configured rules remain pending documentation. Cultural validation is not complete. Core grammar, generation, deconstruction, and export features run locally without a database or paid API; live pose estimation uses the locally included detector assets.
 
 ## Checks
 

@@ -1,11 +1,14 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom'
 import { PagePlaceholder } from './components/PagePlaceholder'
 import { GrammarLabPage } from './pages/GrammarLabPage'
 import { ReferencesPage } from './pages/ReferencesPage'
 import { GeneratorPage } from './pages/GeneratorPage'
 import { DeconstructPage } from './pages/DeconstructPage'
-import { PoseMirrorPage } from './pages/PoseMirrorPage'
 import { PersonalizationPage } from './pages/PersonalizationPage'
+import { CompetitionModePage } from './pages/CompetitionModePage'
+
+const PoseMirrorPage = lazy(() => import('./pages/PoseMirrorPage').then((module) => ({ default: module.PoseMirrorPage })))
 
 const navigation = [
   { label: 'Home', path: '/' },
@@ -15,6 +18,8 @@ const navigation = [
   { label: 'Generator', path: '/generator' },
   { label: 'Pose Mirror', path: '/pose' },
   { label: 'Personalize', path: '/personalize' },
+  { label: 'Competition', path: '/competition' },
+  { label: 'Competition', path: '/competition' },
   { label: 'Archive', path: '/archive' },
 ]
 
@@ -74,8 +79,10 @@ function App() {
             <Route path="/references" element={<ReferencesPage />} />
             <Route path="/deconstruct" element={<DeconstructPage />} />
             <Route path="/generator" element={<GeneratorPage />} />
-            <Route path="/pose" element={<PoseMirrorPage />} />
+            <Route path="/pose" element={<Suspense fallback={<div role="status">Loading Pose Mirror…</div>}><PoseMirrorPage /></Suspense>} />
             <Route path="/personalize" element={<PersonalizationPage />} />
+            <Route path="/competition" element={<CompetitionModePage />} />
+            <Route path="/competition" element={<CompetitionModePage />} />
             <Route path="/archive" element={<PagePlaceholder title="Archive" />} />
             <Route path="*" element={<PagePlaceholder title="Page not found" />} />
           </Routes>
