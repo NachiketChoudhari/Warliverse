@@ -4,6 +4,7 @@ import { GrammarLabPage } from './pages/GrammarLabPage'
 import { ReferencesPage } from './pages/ReferencesPage'
 import { GeneratorPage } from './pages/GeneratorPage'
 import { DeconstructPage } from './pages/DeconstructPage'
+import { PoseMirrorPage } from './pages/PoseMirrorPage'
 
 const navigation = [
   { label: 'Home', path: '/' },
@@ -72,7 +73,7 @@ function App() {
             <Route path="/references" element={<ReferencesPage />} />
             <Route path="/deconstruct" element={<DeconstructPage />} />
             <Route path="/generator" element={<GeneratorPage />} />
-            <Route path="/pose" element={<PagePlaceholder title="Pose Mirror" />} />
+            <Route path="/pose" element={<PoseMirrorPage />} />
             <Route path="/personalize" element={<PagePlaceholder title="Personalize" />} />
             <Route path="/archive" element={<PagePlaceholder title="Archive" />} />
             <Route path="*" element={<PagePlaceholder title="Page not found" />} />

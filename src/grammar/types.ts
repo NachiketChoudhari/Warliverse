@@ -30,6 +30,26 @@ export interface HumanStructure {
   parts: Record<HumanPart, PrimitiveId>
 }
 
+/** SVG geometry values are renderer coordinates, not cultural measurements. */
+export interface Point2D {
+  x: number
+  y: number
+}
+
+export interface LineSegment {
+  start: Point2D
+  end: Point2D
+}
+
+export interface HumanFigureGeometry {
+  head?: { center: Point2D; radius: number }
+  body?: readonly [Point2D, Point2D, Point2D]
+  leftArm?: readonly LineSegment[]
+  rightArm?: readonly LineSegment[]
+  leftLeg?: readonly LineSegment[]
+  rightLeg?: readonly LineSegment[]
+}
+
 export interface MotifInstance {
   motif: MotifId | string
   structure?: Partial<Record<HumanPart, PrimitiveId | string>>

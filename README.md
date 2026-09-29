@@ -1,6 +1,6 @@
 # WARLI — Visual Grammar & Digital Preservation Studio
 
-An Aavishkar competition project for representing documented Warli visual grammar and supporting digital preservation. Phase 1 provides a structured, rule-based grammar model, modular SVG sketches, a shared canvas, and a Grammar Lab. The project currently has no reference dataset, procedural scene generator, or pose estimation.
+An Aavishkar competition project for representing documented Warli visual grammar and supporting digital preservation. The application includes a structured, rule-based grammar model, source-aware reference architecture, procedural SVG composition, deconstruction/reconstruction, and a browser-local Pose Mirror.
 
 ## Requirements
 
@@ -55,13 +55,21 @@ The `/generator` page currently uses seeded procedural composition and clearly l
 - `/references` — source and documentation structure; currently empty
 - `/deconstruct` — inspect and reconstruct a labeled procedural demonstration
 - `/generator` — seeded procedural compositions from explicit prototype/demo layouts
-- `/pose` — placeholder
+- `/pose` — browser-local pose landmarks mapped into the configured SVG human figure, with deterministic Demo Mode
 - `/personalize` — placeholder
 - `/archive` — placeholder
 
 ## Stack
 
-React, TypeScript, Vite, React Router, Tailwind CSS, SVG, and Vitest. The app is client-side and requires no database or paid API.
+React, TypeScript, Vite, React Router, Tailwind CSS, SVG, MediaPipe Tasks Vision, browser webcam APIs, and Vitest. The app is client-side and requires no database or paid API.
+
+## Pose Mirror
+
+The Pose Mirror uses the pretrained MediaPipe Pose Landmarker Lite task as a local pose-estimation component. Its model asset is included at `public/models/pose_landmarker_lite.task`; the runtime and WASM assets are bundled from the installed `@mediapipe/tasks-vision` package. The camera stream is passed directly from the browser video element to the local detector. Frames are not uploaded, saved, or sent to an external API.
+
+MediaPipe provides body landmarks. The project's software normalizes those coordinates and maps them to the configured human figure's circle head, triangle body, and line limbs. This mapping is rule-based; it does not train or claim to teach the pose model Warli visual grammar. The camera preview is mirrored for natural interaction, and normalized horizontal coordinates are inverted so the structural figure follows the preview consistently. Camera access generally requires localhost or HTTPS; Demo Mode provides deterministic simulated landmarks through the same mapping path when camera access or hardware is unavailable.
+
+The model asset is distributed from Google's official MediaPipe model storage: [Pose Landmarker Lite task](https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task). MediaPipe's web integration and browser setup are documented in the [official Pose Landmarker Web guide](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker/web_js).
 
 ## Reference Data Pipeline
 
