@@ -42,4 +42,17 @@ describe('evidence audit', () => {
     expect(html).toContain('Source-to-record coverage')
     expect(html).toContain('ccrt-fig4-3-grammar-palaghata-structure-01')
   })
+
+  it('renders Phase 19 rule statuses and gap classes from the production corpus audit', () => {
+    const html = renderToStaticMarkup(createElement(EvidenceAuditPage))
+    expect(html).toContain('Rule evidence and research gaps')
+    expect(html).toContain('14/14')
+    expect(html).toContain('DOCUMENTATION GAP')
+    expect(html).toContain('CROSS-SOURCE GAP')
+    expect(html).toContain('VALIDATION GAP')
+    expect(html).toContain('human.parts.required')
+    expect(html).toContain('Formal assessments: 0')
+    expect(html).toContain('distinct publications: 0')
+    expect(html).toContain('No formal evidence assessment exists for this rule.')
+  })
 })

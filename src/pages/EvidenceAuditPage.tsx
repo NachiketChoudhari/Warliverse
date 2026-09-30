@@ -1,4 +1,5 @@
 import { evidenceAudit } from '../data/evidenceAudit'
+import { corpusResearchAudit } from '../data/corpusResearchAudit'
 
 const stages = [
   { title: 'Documented source', detail: 'Source metadata and its project documentation status.' },
@@ -58,8 +59,27 @@ export function EvidenceAuditPage() {
       </details>)}</div>
     </section>
 
+    <section aria-labelledby="corpus-audit-heading" className="space-y-5 border-t border-line pt-8">
+      <div><p className="text-xs uppercase tracking-[0.18em] text-muted">Phase 19 / Corpus-level audit</p><h2 id="corpus-audit-heading" className="mt-2 font-serif text-2xl">Rule evidence and research gaps</h2><p className="mt-2 max-w-4xl text-sm leading-6 text-muted">The counts below distinguish formal documentary assessments from Phase 16 dossier context. Context references prepare a review; they are not evidence relationships, expert validation, or promotion decisions.</p></div>
+      <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4 xl:grid-cols-6">{[
+        ['Source records', corpusResearchAudit.counts.sourceRecordCount], ['Observation-bearing publications', corpusResearchAudit.counts.observationBearingPublicationCount], ['Artworks', corpusResearchAudit.counts.artworkCount], ['Observations with provenance', `${corpusResearchAudit.counts.observationsWithProvenance}/${corpusResearchAudit.counts.motifObservationCount + corpusResearchAudit.counts.grammarObservationCount}`], ['Evidence assessments', corpusResearchAudit.counts.documentaryEvidenceAssessmentCount], ['Expert validation records', corpusResearchAudit.counts.expertValidationRecordCount],
+      ].map(([label, value]) => <div key={label} className="border border-line p-3"><dt className="text-xs leading-5 text-muted">{label}</dt><dd className="mt-1 font-serif text-2xl">{value}</dd></div>)}</dl>
+      <p className="text-xs leading-5 text-muted">“Observation-bearing publications” counts distinct source records linked to observations ({corpusResearchAudit.counts.observationBearingPublicationCount}). It does not count independent corroboration. The corpus records D’SOURCE’s web page and PDF as one publication; source comparison assessments currently number {corpusResearchAudit.counts.sourceComparisonCount}.</p>
+      <div className="space-y-4">{corpusResearchAudit.rules.map((rule) => <details key={rule.ruleId} className="border border-line bg-white/35 p-5">
+        <summary className="cursor-pointer"><code className="text-xs text-terracotta">{rule.ruleId}</code><span className="ml-3 font-medium">{rule.readinessStatus.join(' · ')}</span><span className="ml-3 border border-line px-2 py-1 text-[10px] uppercase tracking-wide">{rule.promotionStatus}</span></summary>
+        <div className="mt-5 space-y-5">
+          <div><h3 className="text-sm font-semibold">Current software claim</h3><p className="mt-1 text-sm leading-6">{rule.currentSoftwareClaim}</p><p className="mt-2 text-xs text-muted">Implementation: {rule.implementationLocations.join(', ')}</p></div>
+          <div><h3 className="text-sm font-semibold">Documentary assessment relationships</h3><dl className="mt-2 grid grid-cols-2 gap-2 text-xs sm:grid-cols-5">{Object.entries(rule.assessmentEvidenceCounts).map(([relationship, count]) => <div key={relationship} className="border border-line p-2"><dt className="text-muted">{relationship}</dt><dd className="mt-1 font-semibold">{count}</dd></div>)}</dl><p className="mt-2 text-xs leading-5 text-muted">Formal assessments: {rule.documentaryAssessmentCount} · linked sources: {rule.assessmentSourceCount} · distinct publications: {rule.assessmentDistinctPublicationCount}{rule.assessmentPublicationCountIsExact ? '' : ' (incomplete comparison)'} · artworks: {rule.assessmentArtworkCount} · expert validations: {rule.expertValidationCount}</p><p className="mt-1 text-xs leading-5 text-muted">Review-dossier context only: {rule.contextualDossierRecordCount} records · {rule.sourceCount} source records / {rule.distinctPublicationCount} publication records · {rule.artworkCount} artworks. These are not formal rule evidence assessments. {rule.hasNoFormalEvidenceAssessment ? 'No formal evidence assessment exists for this rule.' : ''}</p></div>
+          <div><h3 className="text-sm font-semibold">Strongest documented support described in the current corpus</h3><p className="mt-1 text-sm leading-6 text-muted">{rule.strongestDocumentedSupport}</p></div>
+          <div><h3 className="text-sm font-semibold">Current limitations and unresolved questions</h3><ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-muted">{[...rule.currentLimitations, ...rule.unresolvedQuestions].map((item) => <li key={item}>{item}</li>)}</ul></div>
+          <div><h3 className="text-sm font-semibold">Gap classification and required next evidence</h3><ul className="mt-2 space-y-2">{rule.gaps.map((gap) => <li key={`${gap.category}:${gap.description}`} className="border-l-2 border-terracotta/50 pl-3"><span className="text-xs font-semibold">{gap.category}</span><p className="text-sm leading-6 text-muted">{gap.description} <span className="text-ink">Next: {gap.futureWork.replaceAll('-', ' ')}.</span></p></li>)}</ul><ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-muted">{rule.requiredNextEvidence.map((item) => <li key={item}>{item}</li>)}</ul></div>
+        </div>
+      </details>)}</div>
+      <ul className="border-l-2 border-terracotta/50 pl-4 text-xs leading-5 text-muted">{corpusResearchAudit.auditWarnings.map((warning) => <li key={warning}>{warning}</li>)}</ul>
+    </section>
+
     <section className="border-t border-line pt-7" aria-labelledby="audit-limits">
-      <p className="text-xs uppercase tracking-[0.18em] text-muted">04 / Interpretation limits</p><h2 id="audit-limits" className="mt-2 font-serif text-2xl">What this audit does not establish</h2>
+      <p className="text-xs uppercase tracking-[0.18em] text-muted">05 / Interpretation limits</p><h2 id="audit-limits" className="mt-2 font-serif text-2xl">What this audit does not establish</h2>
       <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-6 text-muted">
         <li>Source summaries and artwork-specific observations retain their stated scope; they are not independent image annotations unless recorded as such.</li>
         <li>Repeated descriptions across sources are not a consensus measure. The corpus documents no expert validation records.</li>
