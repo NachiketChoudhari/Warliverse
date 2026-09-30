@@ -20,7 +20,7 @@ export function PreservationSummary() {
       </div>
       <div className="border-l-2 border-stone-700 pl-4 text-stone-700">
         <p>The current archive contains {status.referenceRecords} catalogue/artwork references and has {status.sourceBackedRules} source-backed rules.</p>
-        <p className="mt-2">One source-reported human motif and one composition observation are recorded for a figure in a secondary article; no measurements or source-backed rules are recorded.</p>
+        <p className="mt-2">Source-reported motif and composition observations are linked to documented artworks; no measurements or source-backed rules are recorded.</p>
         <p className="mt-2">Cultural validation is not complete. Source-backed interpretation depends on reviewed and attributed material.</p>
       </div>
     </section>

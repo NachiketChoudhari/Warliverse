@@ -50,10 +50,10 @@ describe('research corpus v1', () => {
     expect(result.valid).toBe(true)
     expect(result.errors).toEqual([])
     expect(result.counts).toEqual({
-      sources: 6,
-      artworks: 8,
-      motifObservations: 1,
-      grammarObservations: 1,
+      sources: 7,
+      artworks: 12,
+      motifObservations: 9,
+      grammarObservations: 5,
       measurements: 0,
       grammarEvidence: 0,
     })
@@ -74,14 +74,28 @@ describe('research corpus v1', () => {
     expect(validateReferenceCollection(referenceCollection, grammarRules)).toEqual({ valid: true, issues: [] })
   })
 
-  it('contains only explicit museum maker metadata and does not infer motif observations', () => {
+  it('keeps maker metadata explicit and limits motif observations to documented artworks', () => {
     const jivyaRecord = referenceCollection.artworks.find(({ id }) => id.endsWith('0-3'))
     const groupMakerRecord = referenceCollection.artworks.find(({ id }) => id.endsWith('0-1'))
     expect(jivyaRecord?.artist).toBe('Jivya Soma Mashe')
     expect(groupMakerRecord?.artist).toBeUndefined()
     expect(groupMakerRecord?.notes).toContain('maker Varli')
     expect(referenceCollection.artworks.find(({ id }) => id === 'rao-2022-figure-2-tarpa-dance')?.motifs?.[0]?.motifId).toBe('human')
-    expect(referenceCollection.artworks.filter(({ id }) => id !== 'rao-2022-figure-2-tarpa-dance').every(({ motifs }) => !motifs?.length)).toBe(true)
+    expect(referenceCollection.artworks.find(({ id }) => id === 'dsource-2016-tree-of-life-painting')?.motifs?.map(({ motifId }) => motifId)).toEqual(['animal', 'human', 'sun', 'tree'])
+    expect(referenceCollection.artworks.filter(({ id }) => !id.startsWith('dsource-') && !id.startsWith('rao-')).every(({ motifs }) => !motifs?.length)).toBe(true)
+  })
+
+  it('includes the investigated source and artwork records with valid source links', () => {
+    const sourceIds = new Set(researchCorpusV1.sources.map(({ id }) => id))
+    expect(sourceIds.has('source-dsource-idc-warli-documentation')).toBe(true)
+    const newArtworks = researchCorpusV1.artworks.filter(({ id }) => id.startsWith('ccrt-') || id.startsWith('dsource-'))
+    expect(newArtworks.map(({ id }) => id)).toEqual(expect.arrayContaining([
+      'ccrt-2017-figure-4-3-palaghat-caukat',
+      'dsource-2016-tree-of-life-painting',
+      'dsource-2016-rice-fields-tarpa-nritya-painting',
+      'dsource-2016-paddy-harvest-painting',
+    ]))
+    expect(newArtworks.every(({ source }) => sourceIds.has(source ?? ''))).toBe(true)
   })
 
   it('keeps observations separate from rules and leaves all four rules pending', () => {
@@ -107,6 +121,17 @@ describe('research corpus v1', () => {
       expect(observation.description).toBeTruthy()
     }
     expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('rejects duplicate observation IDs', () => {
+    const duplicate = structuredClone(researchCorpusV1)
+    duplicate.grammarObservations.push({
+      ...duplicate.grammarObservations[0],
+      artworkId: 'dsource-2016-paddy-harvest-painting',
+    })
+    const result = importResearchData(duplicate)
+    expect(result.valid).toBe(false)
+    expect(result.errors).toContainEqual(expect.objectContaining({ code: 'duplicate-id' }))
   })
 
   it('rejects unsupported records with unresolved source or artwork provenance', () => {
@@ -157,10 +182,10 @@ describe('research corpus v1', () => {
     expect(exported.grammarEvidence.every(({ sourceReferenceIds }) => sourceReferenceIds.length === 0)).toBe(true)
   })
 
-  it('keeps candidate institutional PDFs explicitly pending review', () => {
+  it('keeps candidate and partially documented institutional PDFs accurately labeled', () => {
     expect(referenceCollection.sources.find(({ id }) => id === 'source-mota-tribal-faces')?.documentationStatus).toBe('pending-review')
-    expect(referenceCollection.sources.find(({ id }) => id === 'source-ccrt-living-traditions')?.documentationStatus).toBe('pending-review')
+    expect(referenceCollection.sources.find(({ id }) => id === 'source-ccrt-living-traditions')?.documentationStatus).toBe('partially-documented')
     expect(referenceCollection.sources.find(({ id }) => id === 'source-mota-tribal-faces')?.notes).toContain('Candidate source only')
-    expect(referenceCollection.sources.find(({ id }) => id === 'source-ccrt-living-traditions')?.notes).toContain('Candidate source only')
+    expect(referenceCollection.sources.find(({ id }) => id === 'source-ccrt-living-traditions')?.notes).toContain('Reviewed Warli chapter extracts')
   })
 })

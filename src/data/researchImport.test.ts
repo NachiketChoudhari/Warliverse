@@ -3,6 +3,7 @@ import { grammarRules } from './grammar';
 import { importResearchData } from './importResearchData';
 import { createReferenceExport } from './referenceExport';
 import { referenceCollection } from './referenceCollection';
+import { researchCorpusV1 } from './research/researchCorpus';
 import type { ReferenceCollection } from './references';
 import type { ResearchImport } from './researchImport';
 import type { GrammarRule } from '../grammar/types';
@@ -38,7 +39,8 @@ describe('research import pipeline', () => {
   it('accepts the current versioned export and reports the reviewed corpus counts', () => {
     const input = createReferenceExport(referenceCollection, grammarRules);
     const result = importResearchData(input);
-    expect(result).toMatchObject({ valid: true, errors: [], counts: { sources: 6, artworks: 8, motifObservations: 1, grammarObservations: 1, measurements: 0, grammarEvidence: 4 } });
+    expect(result).toMatchObject({ valid: true, errors: [], counts: { sources: 7, artworks: 12, motifObservations: 9, grammarObservations: 5, measurements: 0, grammarEvidence: 4 } });
+    expect(importResearchData(researchCorpusV1).counts.grammarEvidence).toBe(0);
     expect(result.normalizedData).toEqual(input);
   });
 
