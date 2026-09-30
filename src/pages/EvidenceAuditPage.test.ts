@@ -14,6 +14,7 @@ describe('evidence audit', () => {
       grammarObservations: 5,
       measurements: 0,
       grammarEvidence: 0,
+      documentaryRuleAssessments: 0,
       sourceBackedRules: 0,
       pendingRules: 4,
       externalValidationRecords: 0,

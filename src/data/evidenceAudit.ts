@@ -3,6 +3,7 @@ import { getGrammarEvidenceCounts } from './grammarEvidence'
 import { referenceCollection } from './referenceCollection'
 import { createReferenceExport } from './referenceExport'
 import { validationReviewGuides } from './validationReviewGuide'
+import { ruleEvidenceAssessments } from './research/ruleEvidenceAssessments'
 import type { GrammarObservation, MotifObservation, ReferenceSource } from './references'
 
 type AuditObservation = {
@@ -144,6 +145,7 @@ export const evidenceAudit = {
     grammarObservations: allObservations.filter(({ kind }) => kind === 'grammar').length,
     measurements: referenceCollection.artworks.reduce((count, artwork) => count + (artwork.measurements?.length ?? 0), 0),
     grammarEvidence: exportedResearch.grammarEvidence.reduce((count, record) => count + record.sourceReferenceIds.length + record.observationIds.length, 0),
+    documentaryRuleAssessments: ruleEvidenceAssessments.length,
     sourceBackedRules: sourceBackedCount,
     pendingRules: pendingCount,
     externalValidationRecords: 0,
