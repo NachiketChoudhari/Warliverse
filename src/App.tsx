@@ -7,6 +7,7 @@ import { GeneratorPage } from './pages/GeneratorPage'
 import { DeconstructPage } from './pages/DeconstructPage'
 import { PersonalizationPage } from './pages/PersonalizationPage'
 import { CompetitionModePage } from './pages/CompetitionModePage'
+import { ValidationWorkspacePage } from './pages/ValidationWorkspacePage'
 
 const PoseMirrorPage = lazy(() => import('./pages/PoseMirrorPage').then((module) => ({ default: module.PoseMirrorPage })))
 
@@ -14,6 +15,7 @@ const navigation = [
   { label: 'Home', path: '/' },
   { label: 'Grammar', path: '/grammar' },
   { label: 'References', path: '/references' },
+  { label: 'Validation Review', path: '/validation-review' },
   { label: 'Deconstruct', path: '/deconstruct' },
   { label: 'Generator', path: '/generator' },
   { label: 'Pose Mirror', path: '/pose' },
@@ -77,6 +79,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/grammar" element={<GrammarLabPage />} />
             <Route path="/references" element={<ReferencesPage />} />
+            <Route path="/validation-review" element={<ValidationWorkspacePage />} />
             <Route path="/deconstruct" element={<DeconstructPage />} />
             <Route path="/generator" element={<GeneratorPage />} />
             <Route path="/pose" element={<Suspense fallback={<div role="status">Loading Pose Mirror…</div>}><PoseMirrorPage /></Suspense>} />
