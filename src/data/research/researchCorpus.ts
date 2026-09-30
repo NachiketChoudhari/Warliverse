@@ -1,8 +1,8 @@
 import type { ResearchImport } from '../researchImport'
 
 /**
- * Metadata-only research corpus. Candidate PDFs are retained as pending-review
- * sources; no images, motif classifications, measurements, or rules are imported.
+ * Research corpus with metadata plus narrowly scoped observations attributed to
+ * one figure in a secondary academic source. Candidate PDFs remain pending review.
  */
 export const researchCorpusV1 = {
   schemaVersion: 1,
@@ -128,9 +128,49 @@ export const researchCorpusV1 = {
       notes: 'The Museums of India portal listing displays this title with National Museum, New Delhi. No further object metadata was recorded from the reviewed listing.',
       documentationStatus: 'partially-documented',
     },
+    {
+      id: 'rao-2022-figure-2-tarpa-dance',
+      title: 'Tarpa Dance (Figure 2)',
+      source: 'source-rao-warli-aesthetics-2022',
+      sourceType: 'academic',
+      artist: 'Minakshi Vasudev',
+      attribution: {
+        creator: 'Minakshi Vasudev',
+        statement: 'Figure 2 caption attributes the image to Minakshi Vasu Dev; the article elsewhere spells the name Minakshi Vasudev.',
+        sourceReferenceId: 'source-rao-warli-aesthetics-2022',
+      },
+      theme: 'Tarpa Dance (article caption)',
+      notes: 'Figure 2 in Rao (2022), p. 209. Artwork-specific visual details below are transcribed from the author’s text and figure reference, not independently image-annotated. The paper is a secondary source and reports the author’s observations and field interactions.',
+      documentationStatus: 'partially-documented',
+    },
   ],
-  motifObservations: [],
-  grammarObservations: [],
+  motifObservations: [
+    {
+      id: 'rao-2022-fig2-motif-human-01',
+      artworkId: 'rao-2022-figure-2-tarpa-dance',
+      sourceReferenceId: 'source-rao-warli-aesthetics-2022',
+      kind: 'motif-relationships',
+      motifId: 'human',
+      description: 'The author describes a group of women dancing around a person playing a tarpa and identifies Figure 2 as “Tarpa Dance.” This records the source’s description of human figures in this pictured work; it is not an independent visual count.',
+      documentationStatus: 'documented',
+      confidence: 0.78,
+      notes: 'Rao (2022), p. 209, section 5 and Figure 2 caption. Secondary, single-source textual description.',
+    },
+  ],
+  grammarObservations: [
+    {
+      id: 'rao-2022-fig2-grammar-spiral-composition-01',
+      artworkId: 'rao-2022-figure-2-tarpa-dance',
+      sourceReferenceId: 'source-rao-warli-aesthetics-2022',
+      kind: 'composition',
+      description: 'In the Figure 2 discussion, the author associates Tarpa dance with spiral formations of men and women and a concentric circular/spiral design. The source does not provide a separate visual annotation establishing every detail in this particular reproduction.',
+      documentationStatus: 'partially-documented',
+      confidence: 0.62,
+      notes: 'Rao (2022), p. 209, section 5, with Figure 2 cross-reference. This is the author’s secondary-source description, not an independently checked image measurement or universal convention.',
+    },
+  ],
   measurements: [],
+  // No rule evidence is emitted: the observations above do not establish any
+  // configured rule, and the rule-level evidence chain is intentionally open.
   grammarEvidence: [],
 } satisfies ResearchImport

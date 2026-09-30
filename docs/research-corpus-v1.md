@@ -3,15 +3,15 @@
 ## Corpus Summary
 
 - Sources: 6
-- Artwork references: 7
-- Motif observations: 0
-- Grammar observations: 0
+- Artwork references: 8 (the original 7 retained; one source figure record added)
+- Motif observations: 1
+- Grammar observations: 1
 - Measurements: 0
 - Grammar evidence records: 0
 - Source-backed rules: 0
 - Rules pending documentation: 4
 
-The collection is intentionally metadata-only. The six British Museum records and the Museums of India listing are catalogue references, not image analyses. The Ministry of Tribal Affairs and CCRT PDFs are recorded as candidate sources pending reliable content review. No source images were copied into the repository.
+The corpus combines catalogue metadata with two source-reported observations attached to one separately identified figure in the Rao article. This is not an independent visual annotation of the image. The Ministry of Tribal Affairs and CCRT PDFs remain candidate sources pending reliable content review. No source images were copied into the repository.
 
 ## Source Table
 
@@ -30,19 +30,18 @@ The article by Rao is retained as a **Secondary Source**. The paper reports that
 
 ## Evidence Summary
 
-There are no motif observations, grammar observations, measurements, or grammar evidence records in this corpus version. Catalogue associations alone do not establish visual observations. The source images were not copied or programmatically analyzed, and the two candidate PDFs could not be reviewed reliably.
+## Observation Coverage (Phase 11B)
 
-The Rao paper discusses geometric figure construction and other visual characteristics, but those statements are secondary interpretation and are not attached here as artwork-specific observations. No independent source comparison has been completed for any proposed computational rule. Therefore:
+The six British Museum objects (`british-museum-1988-0209-0-1` through `-0-6`) were not analyzable for motifs or grammar: the collection term page exposes catalogue metadata, while individual object pages returned access errors in this review. `museums-of-india-national-museum-warli-painting` was not analyzable: the portal lists only “Warli Painting” with National Museum, New Delhi, without an accessible object-level image or description. The two candidate PDFs were not reliably reviewable. No motif is inferred from those titles or catalogue records.
 
-- Supporting references for a reviewed interpretation: none recorded.
-- Conflicting observations: none recorded; the absence of recorded conflicts is not evidence of agreement.
-- Uncertainty: high for generalizing any description across objects, makers, contexts, or media.
-- Review status: no interpretation is ready for rule promotion.
+Analyzed source material: `rao-2022-figure-2-tarpa-dance`, Figure 2 in Rao (2022), p. 209. The article caption identifies a Tarpa Dance by Minakshi Vasu Dev/Vasudev. Its adjacent text reports women dancing around a tarpa player and associates Tarpa dance with spiral formations and concentric circular/spiral design. This is recorded as one human motif observation and one composition observation, both explicitly attributed to the article. The composition record notes that the article does not isolate every claim as a separate visual annotation of that reproduction. Confidence is therefore limited. The source is secondary and single-source; it is not independent corroboration.
 
-Cross-source classification: **single-source observation — none entered; repeated observation — none established; conflicting observation — none assessed; evidence for any proposed software rule — insufficient.**
+No interpretation is stored as an observation or rule. For later Phase 12 review only, the reported spiral grouping may be considered as a possible composition interpretation; it does not validate a current software rule. The article's general discussion of geometric human construction (pp. 211–212) is not attached to the Figure 2 artwork because the article does not establish those details as specific to that figure. No measurements were made: no reproducible image measurement was available in this workflow. Measurements remain empty.
+
+Cross-source classifications for the recorded observations: **single-source** (Rao article only); **repeated across independent sources: none established**; **conflicting: none assessed**; **evidence sufficient for a configured software rule: none**. The absence of a recorded conflict is not evidence of agreement. The source images were not copied into the repository.
 
 ## Provenance and Rights
 
 Artwork records link to an institutional source ID. The Jivya Soma Mashe maker attribution also points to the Museum person record. The system stores metadata and official links only. Rights information is recorded only where the source explicitly states it (the Rao article's CC BY 4.0 notice); museum image rights are not inferred from access to catalogue pages.
 
-No grammar rule has been linked to these sources. Corpus import passed the Phase 10 validate-only pipeline before the normalized source and artwork records were applied. Importing the records did not change grammar rules.
+Corpus import passes through the Phase 10 validate-only pipeline before normalized source, artwork, and observation records are used. Importing these records does not change grammar rules or attach source IDs to them. The research `grammarEvidence` array remains empty because no complete evidence chain justifies linking these observations to a configured rule.

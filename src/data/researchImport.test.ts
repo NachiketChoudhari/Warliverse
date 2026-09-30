@@ -38,7 +38,7 @@ describe('research import pipeline', () => {
   it('accepts the current versioned export and reports the reviewed corpus counts', () => {
     const input = createReferenceExport(referenceCollection, grammarRules);
     const result = importResearchData(input);
-    expect(result).toMatchObject({ valid: true, errors: [], counts: { sources: 6, artworks: 7, motifObservations: 0, grammarObservations: 0, measurements: 0, grammarEvidence: 4 } });
+    expect(result).toMatchObject({ valid: true, errors: [], counts: { sources: 6, artworks: 8, motifObservations: 1, grammarObservations: 1, measurements: 0, grammarEvidence: 4 } });
     expect(result.normalizedData).toEqual(input);
   });
 

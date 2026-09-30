@@ -44,4 +44,19 @@ Review scope: the four existing configured rules. This review does not edit thei
 
 ## Promotion Gate
 
-All four rules still have empty `sourceReferenceIds`. Source records, catalogue descriptions, and secondary interpretation have not been converted into artwork-specific observations or reviewed grammar evidence. No rule is promoted in this corpus version.
+All four rules still have empty `sourceReferenceIds`. The source-reported observations now recorded are not converted into rule evidence because they do not support a configured rule with sufficient specificity. No rule is promoted in this corpus version.
+
+## Phase 11B Evidence Update
+
+The observation corpus now includes one source-reported human motif and one source-reported composition observation for `rao-2022-figure-2-tarpa-dance`, both linked to `source-rao-warli-aesthetics-2022`. The article (Rao 2022, p. 209) identifies the figure as a Tarpa Dance and discusses dancers, a tarpa player, and spiral/concentric arrangement. These are single-source secondary descriptions, not independently classified image features. No grammar evidence record is created because neither observation supports a configured rule with sufficient specificity. The Phase 10 export still emits its four derived rule entries, but each has an empty source list; they are not source-backed evidence records.
+
+### Evidence available by configured rule
+
+| Rule | Supporting observations | Source/artwork IDs | Conflicting evidence | Evidence status | Why pending |
+| ---- | ----------------------- | ------------------ | ------------------- | --------------- | ----------- |
+| `motif.allowed` | `rao-2022-fig2-motif-human-01` documents a source-reported human motif in one figure. | `source-rao-warli-aesthetics-2022` → `rao-2022-figure-2-tarpa-dance` | None assessed. The seven original catalogue records were not visually analyzable. | Single-source, limited relevance; insufficient for an exhaustive application vocabulary. | One reported motif cannot establish that the configured five IDs are complete, exclusive, or appropriate across artworks and contexts. |
+| `human.parts.required` | None that establishes required presence of every configured part. The Figure 2 observations do not describe part completeness. | No supporting artwork-specific observation. | None assessed. | Insufficient. | No evidence establishes that every represented human must contain each software-defined part. |
+| `human.part.primitive` | None linked to the exact Figure 2 construction. Rao's general discussion on pp. 211–212 is not attached to this artwork because its specificity to Figure 2 is unverified. | No supporting artwork-specific observation. | None assessed. | General secondary discussion only; insufficient and not linked as evidence. | The exact six-part mapping and its scope are not established. A source description of geometric figures would not by itself validate the software abstraction. |
+| `theme.allowed-motifs` | None. Figure 2's “Tarpa Dance” caption and adjacent discussion do not provide an exhaustive theme allow-list. | No supporting evidence chain. | None assessed. | No supporting evidence. | A single named scene cannot justify motif exclusions or the application's prototype theme configuration. |
+
+For all four rules, `sourceReferenceIds` remain absent and documentation status remains pending. Observations remain separate records and have no `ruleId`. No promotion decision has been made; this material is prepared for the later Phase 12 review.

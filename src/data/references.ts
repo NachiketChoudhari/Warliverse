@@ -34,6 +34,8 @@ export interface ObservationMetadata {
   sourceReferenceId?: string
   confidence?: number
   notes?: string
+  /** Documentation state of this record, distinct from any software rule status. */
+  documentationStatus?: ReferenceStatus
 }
 
 export type ObservationKind =

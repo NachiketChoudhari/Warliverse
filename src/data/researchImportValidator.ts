@@ -30,7 +30,7 @@ function isSafeForArchiveValidation(sources: unknown[], artworks: unknown[]): bo
       && safeObservationArray(artwork.observations)
       && safeObservationArray(artwork.measurements)
       && [artwork.motifs, artwork.observations, artwork.measurements].filter(Array.isArray).flat().every((item) => isRecord(item)
-        && ['id', 'sourceReferenceId', 'kind', 'motifId', 'primitiveId', 'ruleId'].every((field) => safeText(item[field]))));
+        && ['id', 'sourceReferenceId', 'kind', 'motifId', 'primitiveId', 'ruleId', 'documentationStatus'].every((field) => safeText(item[field]))));
 }
 
 function validateFallbackIntegrity(sources: unknown[], artworks: unknown[], errors: ResearchImportIssue[]) {
@@ -130,7 +130,8 @@ function optionalStrings(record: Record<string, unknown>, keys: readonly string[
 }
 
 function observationMetadata(record: Record<string, unknown>, path: string, issues: ResearchImportIssue[]) {
-  optionalStrings(record, ['sourceReferenceId', 'notes'], path, issues);
+  optionalStrings(record, ['sourceReferenceId', 'notes', 'documentationStatus'], path, issues);
+  if (typeof record.documentationStatus === 'string' && !statuses.has(record.documentationStatus as ReferenceStatus)) add(issues, 'invalid-documentation-status', `${path}.documentationStatus`, 'Documentation status is not part of the configured schema.');
   if (record.confidence !== undefined && (typeof record.confidence !== 'number' || !Number.isFinite(record.confidence) || record.confidence < 0 || record.confidence > 1)) {
     add(issues, 'invalid-confidence', `${path}.confidence`, 'Confidence must be a finite number from 0 through 1.');
   }
